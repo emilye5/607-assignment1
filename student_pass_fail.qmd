@@ -1,0 +1,18 @@
+---
+title: "Student_Pass_Fail"
+author: "Emily El Mouaquite"
+format: html
+editor: visual
+---
+
+# Assignment 1 - Student Pass/ Fail
+
+## Approach:
+
+I found a very simple dataset with data on students in a singular class. As I currently work at an elementary school, I wanted to explore what individualized factors may play into a student passing or failing a class and create a subset of the data based on one of them.
+
+Source: https://www.kaggle.com/datasets/ishanjha100/student-passfail-data
+
+```{r}
+1 + 1
+```

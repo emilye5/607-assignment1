@@ -1,0 +1,48 @@
+---
+title: "Assignment 1"
+author: "Emily El Mouaquite"
+format: html
+execute: 
+  echo: true
+---
+
+# Assignment 1 - Student Pass/ Fail
+
+## Approach:
+
+I found a very simple dataset with data on students in a singular class. As I currently work at an elementary school, I wanted to explore what individualized factors may play into a student passing or failing a class and create a subset of the data based on one of them.
+
+Source: https://www.kaggle.com/datasets/ishanjha100/student-passfail-data
+
+## Introduction:
+
+This dataset contains information on 100 students in one class. Its variables are their student Id, percent of classes attended, homework grade percentage, midterm score, hours studied per week, and whether or not they passed or failed the class. The URL to this dataset is:
+[Student Pass/Fail Data](https://www.kaggle.com/datasets/ishanjha100/student-passfail-data). 
+
+## Body:
+
+### Read csv and create subset
+```{r}
+library(readr)
+url <- "https://raw.githubusercontent.com/emilye5/607-assignment1/refs/heads/main/pass_fail.csv"
+students <- read_csv(
+  file = url,
+  show_col_types = FALSE,
+  progress = FALSE
+)
+newvars <- c("student_id", "attendance_pct", "pass")
+subsetstudents <- students[newvars]
+```
+
+I wanted to look at whether or not a student passed or failed this class through the context of their attendance. By reason of this, I decided to create the new data frame containing the subset of the original data with exclusively the student Id, attendance percentage, and pass columns. In order to analyze the correlation (if any) between the students' attendance and their pass/ fail status, I created the below box plot based on solely the new subsetstudents data frame. 
+
+### Boxplot
+```{r}
+library(ggplot2)
+ggplot(subsetstudents, aes(x = factor(pass), y = attendance_pct)) +
+  geom_boxplot(fill = "lightblue")
+```
+To create this box plot, I used the ggplot function and my subsetstudents data frame. Since pass is a boolean variable, I created two different boxes on the same plot through the usage of factor(pass) in my code. 
+
+## Conclusions:
+The box plot shows a strong association between the students' attendance and whether or not they passed the class. For those that passed, the median attendance seems to be at around 82 percent. For those that did not pass, the median is about 51 percent. Additionally, there is a clear separation in attendance between the students that passed and the ones that did not. The highest attendance percentage value for those that did not pass and the lowest for those that did pass both look to be at around 67 to 68 percent. This all suggests that higher attendance is associated with passing the class. An extension of this work might include creating subsets of the data based on other variables, like the hours that the students studied per week, to look into possible associations with their midterm or homework scores. One might also do further verification of the association between attendance and passing/ failing the class through conducting a t-test or other statistical analysis. 
